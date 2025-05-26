@@ -2,7 +2,7 @@
 let
   configOptions = import ./config-options.nix { inherit lib; };
   cfg = config.programs.nufetch;
-  configFile = import ./config-maker.nix { inherit config lib; };
+  configFile = pkgs.writeText "nufetch.conf" (import ./config-maker.nix { inherit cfg lib; });
 in
 {
   options = import ./config-options.nix { inherit lib; };
