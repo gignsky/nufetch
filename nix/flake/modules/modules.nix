@@ -1,4 +1,4 @@
-{ inputs, lib, configLib, ... }:
+{ ... }:
 {
   flake.nixosModules = {
     nufetch = {
@@ -8,5 +8,6 @@
         ../../lib/config-maker.nix
       ];
     };
+    default = self: self.nufetch;
   };
 }
