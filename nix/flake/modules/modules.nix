@@ -4,8 +4,8 @@
     nufetch = {
       imports = [
         ../../modules/nixos-module.nix
-        ../../modules/config-options.nix
-        ../../modules/config-maker.nix
+        ../../lib/config-options.nix
+        ../../lib/config-maker.nix
       ];
     };
   };

@@ -5,7 +5,7 @@ let
   home = config.users.users.${username}.home;
 in
 {
-  options = import ../../config-options.nix { inherit lib; };
+  options = import ../lib/config-options.nix { inherit lib; };
   config = lib.mkIf config.programs.neofetch.enable {
     environment.systemPackages = with pkgs; [
       neofetch
