@@ -32,14 +32,12 @@ let
       (if builtins.isList (cfg.extraFields or [ ]) then (cfg.extraFields or [ ]) else [ ])
     ));
   configConf = ''
-    info title
-    info underline
-
     print_info() {
+      info title
+      info underline
       ${lib.concatStringsSep "\n  " configLines}
+      info cols
     }
-
-    info cols
   '';
 in
 configConf
