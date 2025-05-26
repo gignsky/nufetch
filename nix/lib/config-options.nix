@@ -2,7 +2,7 @@
 {
   config = { };
   options = {
-    programs.neofetch = {
+    programs.nufetch = {
       enable = lib.enableOption {
         default = false;
         description = "Enable Neofetch with custom options, a command-line utility to display system information.";
