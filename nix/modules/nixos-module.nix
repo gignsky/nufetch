@@ -1,14 +1,14 @@
 { config, pkgs, lib, ... }:
 let
-  neofetchCfg = config.programs.neofetch;
-  enabledFields = lib.filterAttrs (_: v: v == true) (lib.removeAttrs neofetchCfg [ "enable" "extraFields" ]);
-  extraFields = neofetchCfg.extraFields;
+  nufetchCfg = config.programs.nufetch;
+  enabledFields = lib.filterAttrs (_: v: v == true) (lib.removeAttrs nufetchCfg [ "enable" "extraFields" ]);
+  extraFields = nufetchCfg.extraFields;
   configFile = pkgs.writeText "nufetch.conf"
-    (import ../lib/config-maker.nix { cfg = neofetchCfg; lib = lib; });
+    (import ../lib/config-maker.nix { cfg = nufetchCfg; lib = lib; });
 in
 {
   imports = [ ../lib/neofetch.nix ];
-  config = lib.mkIf config.programs.neofetch.enable {
+  config = lib.mkIf config.programs.nufetch.enable {
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "neofetch" ''
         exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
