@@ -41,8 +41,4 @@ let
     info cols
   '';
 in
-{
-  # home.file.".config/neofetch/config.conf".source = configConf;
-
-
-}
+configConf

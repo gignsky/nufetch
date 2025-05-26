@@ -11,16 +11,16 @@ let
   );
 in
 {
-  options = import ../lib/config-options.nix { inherit lib; };
-  config = lib.mkIf config.programs.neofetch.enable {
-    environment.systemPackages = [
-      (pkgs.writeShellScriptBin "neofetch" ''
+  imports = [ ../lib/neofetch.nix ]
+    config = lib.mkIf config.programs.neofetch.enable {
+  environment.systemPackages = [
+  (pkgs.writeShellScriptBin "neofetch" ''
         exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       '')
-      (pkgs.writeShellScriptBin "nufetch" ''
+  (pkgs.writeShellScriptBin "nufetch" ''
         exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       '')
-    ];
-    environment.etc."nufetch.conf".source = configFile;
-  };
+  ];
+  environment.etc."nufetch.conf".source = configFile;
+};
 }
