@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.programs.neofetch;
-  home = config.home.homeDirectory;
+  # home = config.home.homeDirectory;
   # Generate config.conf content based on options
   configConf = ''
     info title
