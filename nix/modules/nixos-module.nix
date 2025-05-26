@@ -3,12 +3,8 @@ let
   neofetchCfg = config.programs.neofetch;
   enabledFields = lib.filterAttrs (_: v: v == true) (lib.removeAttrs neofetchCfg [ "enable" "extraFields" ]);
   extraFields = neofetchCfg.extraFields;
-  configFile = pkgs.writeText "nufetch.conf" (
-    lib.concatStringsSep "\n" (
-      (lib.mapAttrsToList (k: _: "${k}=true") enabledFields)
-      ++ (lib.mapAttrsToList (k: v: "${k}=${v}") extraFields)
-    )
-  );
+  configFile = pkgs.writeText "nufetch.conf"
+    (import ../lib/config-maker.nix { cfg = neofetchCfg; lib = lib; });
 in
 {
   imports = [ ../lib/neofetch.nix ];
