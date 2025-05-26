@@ -1,6 +1,6 @@
-{ config, lib, ... }:
+{ cfg, lib, ... }:
 let
-  cfg = config.programs.neofetch;
+  # cfg = config.programs.neofetch;
   # home = config.home.homeDirectory;
   # Generate config.conf content based on options
   configConf = ''
@@ -35,6 +35,7 @@ let
         (if cfg.public_ip then ''info "Public IP" public_ip'' else null)
         (if cfg.users then ''info "Users" users'' else null)
         (if cfg.birthday then ''info "Birthday" birthday'' else null)
+        (lib.concatStringsSep "\n  " (map (f: ''info "${f.name}" ${f.value}'') (cfg.extraFields or [])))
       ])}
     }
   
