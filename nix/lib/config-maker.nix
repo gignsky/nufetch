@@ -42,7 +42,7 @@ let
   '';
 in
 {
-  home.file.".config/neofetch/config.conf".source = configConf;
+  # home.file.".config/neofetch/config.conf".source = configConf;
 
 
 }
