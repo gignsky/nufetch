@@ -38,6 +38,8 @@ let
       ${lib.concatStringsSep "\n  " configLines}
       info cols
     }
+    cpu_temp="C"
+    refresh_rate="on"
   '';
 in
 configConf
