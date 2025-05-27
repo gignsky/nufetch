@@ -28,7 +28,6 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
-      # See ./nix/modules/*.nix for the modules that are imported here.
       imports = with builtins;
         map
           (fn: ./nix/flake/modules/${fn})
