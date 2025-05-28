@@ -6,7 +6,7 @@ in
 {
   imports = [ ../lib/neofetch.nix ];
   config = lib.mkIf config.programs.nufetch.enable {
-    environment.systemPackages = [
+    home.packages = [
       #   (pkgs.writeShellScriptBin "neofetch" ''
       #     exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       #   '')
