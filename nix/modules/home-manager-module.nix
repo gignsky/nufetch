@@ -4,7 +4,6 @@ let
   configFile = pkgs.writeText "config.conf" (import ../lib/config-maker.nix { inherit cfg lib; });
 in
 {
-  imports = [ ../lib/neofetch.nix ];
   config = lib.mkIf config.programs.nufetch.enable {
     home.packages = [
       #   (pkgs.writeShellScriptBin "neofetch" ''
