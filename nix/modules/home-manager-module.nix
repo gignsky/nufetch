@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.programs.nufetch;
-  configFile = pkgs.writeText "nufetch.conf" (import ../lib/config-maker.nix { inherit cfg lib; });
+  configFile = pkgs.writeText "neofetch.conf" (import ../lib/config-maker.nix { inherit cfg lib; });
 in
 {
   imports = [ ../lib/neofetch.nix ];
