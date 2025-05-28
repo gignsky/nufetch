@@ -15,6 +15,6 @@ in
       '')
       pkgs.neofetch
     ];
-    home.".config/neofetch/neofetch.conf".source = configFile;
+    home.file.".config/neofetch/neofetch.conf".source = configFile;
   };
 }
