@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
-  patchedPkgs = import ../..inputs.nixpkgs {
+  patchedPkgs = import inputs.nixpkgs {
     system = pkgs.system;
     overlays = [
       (import ../overlays/neofetch-patch-nixos-module.nix)
