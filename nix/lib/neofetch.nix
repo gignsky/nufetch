@@ -1,8 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 {
   options = import ./config-options.nix { inherit lib; };
-  config = lib.mkIf config.programs.nufetch.enable {
-    environment.systemPackages = [ pkgs.neofetch ];
-    # environment.etc."nufetch.conf".source = configFile;
-  };
+  config = lib.mkIf config.programs.nufetch.enable { };
 }
