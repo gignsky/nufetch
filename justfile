@@ -13,7 +13,7 @@ show:
 # Ensure no untracked or uncommitted .nix files are left out
 dont-fuck-my-build:
 	git ls-files --others --exclude-standard -- '*.nix' | xargs -r git add -v | lolcat 2> /dev/null
-	echo "No chance your build is fucked! 👍" | lolcat
+	echo "No chance your build is fucked! 👍" | lolcat 2> /dev/null
 
 # Run the 'omnix' tool with the provided arguments
 om *ARGS:
@@ -26,8 +26,7 @@ health:
 
 # Clean up build artifacts and temporary files
 clean:
-	rm -rfv result
-	cargo clean
+	rm -rfv result result-man
 	quick-results
 
 # Update a single flake input using a nice little tool created by vimjoyer
