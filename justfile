@@ -27,7 +27,6 @@ health:
 # Clean up build artifacts and temporary files
 clean:
 	rm -rfv result
-	cargo clean
 	quick-results
 
 # Update a single flake input using a nice little tool created by vimjoyer

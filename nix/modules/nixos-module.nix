@@ -1,22 +1,25 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
-  neofetchCfg = config.programs.neofetch;
-  enabledFields = lib.filterAttrs (_: v: v == true) (lib.removeAttrs neofetchCfg [ "enable" "extraFields" ]);
-  extraFields = neofetchCfg.extraFields;
-  configFile = pkgs.writeText "nufetch.conf" (
-    lib.concatStringsSep "\n" (
-      (lib.mapAttrsToList (k: _: "${k}=true") enabledFields)
-      ++ (lib.mapAttrsToList (k: v: "${k}=${v}") extraFields)
-    )
-  );
+  patchedPkgs = import inputs.nixpkgs {
+    system = pkgs.system;
+    overlays = [
+      (import ../overlays/neofetch-patch-nixos-module.nix)
+    ];
+  };
+  cfg = config.programs.nufetch;
+  configFile = pkgs.writeText "nufetch.conf" (import ../lib/config-maker.nix { inherit cfg lib; });
 in
 {
-  options = import ../lib/config-options.nix { inherit lib; };
-  config = lib.mkIf config.programs.neofetch.enable {
+  imports = [ ../lib/neofetch.nix ];
+  config = lib.mkIf config.programs.nufetch.enable {
     environment.systemPackages = [
-      (pkgs.writeShellScriptBin "neofetch" ''
-        exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
+      #   (pkgs.writeShellScriptBin "neofetch" ''
+      #     exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
+      #   '')
+      (pkgs.writeShellScriptBin "nufetch" ''
+        exec ${patchedPkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       '')
+      patchedPkgs.neofetch
     ];
     environment.etc."nufetch.conf".source = configFile;
   };

@@ -18,7 +18,6 @@
         # dotfiles programs
         inputs.dotfiles.packages.${system}.quick-results
         inputs.dotfiles.packages.${system}.upjust
-        inputs.dotfiles.packages.${system}.cargo-update
       ];
       shellHook = ''
         echo "welcome to the nix development environment for the nufetch package" | ${pkgs.cowsay}/bin/cowsay | ${pkgs.lolcat}/bin/lolcat 2> /dev/null;
