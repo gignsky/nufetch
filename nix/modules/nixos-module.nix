@@ -1,5 +1,11 @@
-{ config, pkgs, patchedPkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
+  patchedPkgs = import ../..inputs.nixpkgs {
+    system = pkgs.system;
+    overlays = [
+      (import ../overlays/neofetch-patch-nixos-module.nix)
+    ];
+  };
   cfg = config.programs.nufetch;
   configFile = pkgs.writeText "nufetch.conf" (import ../lib/config-maker.nix { inherit cfg lib; });
 in
