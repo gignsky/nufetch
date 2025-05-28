@@ -137,10 +137,15 @@
         default = false;
         description = "Enable Neofetch Birthday information display.";
       };
-      extraFields = lib.mkOption {
-        type = lib.types.attrsOf lib.types.str;
-        default = { };
-        description = "Extra fields to display in Neofetch. Use this to add custom information.";
+      extraPrintInfoFields = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Extra config lines to append to the generated Neofetch config. Use a long string (e.g. '''') for multi-line content.";
+      };
+      extraGenericFields = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Extra config lines to append to the generated Neofetch config. Use a long string (e.g. '''') for multi-line content.";
       };
     };
   };

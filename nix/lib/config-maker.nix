@@ -28,18 +28,18 @@ let
       (if cfg.public_ip then ''info "Public IP" public_ip'' else null)
       (if cfg.users then ''info "Users" users'' else null)
       (if cfg.birthday then ''info "Birthday" birthday'' else null)
-    ] ++ (map (f: ''info "${f.name}" ${f.value}'')
-      (if builtins.isList (cfg.extraFields or [ ]) then (cfg.extraFields or [ ]) else [ ])
-    ));
+    ]);
   configConf = ''
     print_info() {
       info title
       info underline
       ${lib.concatStringsSep "\n  " configLines}
+      ${cfg.extraPrintInfoFields}
       info cols
     }
     cpu_temp="C"
     refresh_rate="on"
+    ${cfg.extraGenericFields}
   '';
 in
 configConf
