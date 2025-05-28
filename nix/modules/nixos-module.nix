@@ -11,9 +11,9 @@ in
       #     exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       #   '')
       (pkgs.writeShellScriptBin "nufetch" ''
-        exec ${outputs.neofetch-nixos-module}/bin/neofetch --config /etc/nufetch.conf "$@"
+        exec ${outputs.packages.${pkgs.system}.neofetch-nixos-module}/bin/neofetch --config /etc/nufetch.conf "$@"
       '')
-      outputs.neofetch-nixos-module
+      outputs.packages.${pkgs.system}.neofetch-nixos-module
     ];
     environment.etc."nufetch.conf".source = configFile;
   };
