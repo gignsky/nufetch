@@ -34,8 +34,8 @@ let
       info title
       info underline
       ${lib.concatStringsSep "\n  " configLines}
-      info cols
       ${cfg.extraPrintInfoFields}
+      info cols
     }
     cpu_temp="C"
     refresh_rate="on"
