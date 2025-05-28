@@ -1,4 +1,4 @@
-{ config, pkgs, outputs, system, lib, ... }:
+{ config, pkgs, patchedPkgs, lib, ... }:
 let
   cfg = config.programs.nufetch;
   configFile = pkgs.writeText "nufetch.conf" (import ../lib/config-maker.nix { inherit cfg lib; });
@@ -11,9 +11,9 @@ in
       #     exec ${pkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       #   '')
       (pkgs.writeShellScriptBin "nufetch" ''
-        exec ${outputs.packages.${system}.neofetch-nixos-module}/bin/neofetch --config /etc/nufetch.conf "$@"
+        exec ${patchedPkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       '')
-      outputs.packages.${system}.neofetch-nixos-module
+      # patchedPkgs.neofetch
     ];
     environment.etc."nufetch.conf".source = configFile;
   };

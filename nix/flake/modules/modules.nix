@@ -1,13 +1,25 @@
-{ ... }:
+{ inputs, ... }:
 {
-  flake.nixosModules = {
-    nufetch = {
-      imports = [
-        ../../modules/nixos-module.nix
-        ../../lib/config-options.nix
-        # ../../lib/config-maker.nix
-      ];
+  perSystem = { pkgs, system, ... }:
+    let
+      patchedPkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = [
+          (import ../../overlays/neofetch-patch-nixos-module.nix)
+        ];
+      };
+    in
+    {
+      flake.nixosModules = {
+        nufetch = {
+          imports = [
+            ../../modules/nixos-module.nix
+            { inherit patchedPkgs; }
+            ../../lib/config-options.nix
+            # ../../lib/config-maker.nix
+          ];
+        };
+        default = self: self.nufetch;
+      };
     };
-    default = self: self.nufetch;
-  };
 }
