@@ -148,7 +148,7 @@ Contributions are welcome! Please open issues or pull requests on [GitHub](https
 
 ## License
 
-TODO
+This project is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE) for details.
 
 ---
 
