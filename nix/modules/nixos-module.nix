@@ -19,7 +19,7 @@ in
       (pkgs.writeShellScriptBin "nufetch" ''
         exec ${patchedPkgs.neofetch}/bin/neofetch --config /etc/nufetch.conf "$@"
       '')
-      # patchedPkgs.neofetch
+      patchedPkgs.neofetch
     ];
     environment.etc."nufetch.conf".source = configFile;
   };
